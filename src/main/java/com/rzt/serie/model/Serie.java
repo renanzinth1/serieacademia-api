@@ -41,11 +41,11 @@ public class Serie {
 		super();
 	}
 
-	public Serie(Long codigo, @NotNull @Min(3) @Max(10) String nome, List<SerieExercicio> exercicios) {
+	public Serie(Long codigo, @NotEmpty String nome, List<SerieExercicio> exercicios) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
-		//this.exercicios = exercicios;
+		this.exercicios = exercicios;
 	}
 
 	public Long getCodigo() {

@@ -33,8 +33,8 @@ public class SerieResource {
 	@Autowired
 	private IExercicio exercicios;
 
-//	@Autowired
-//	private SerieService serieService;
+	@Autowired
+	private SerieService serieService;
 
 	@GetMapping
 	public ResponseEntity<List<Serie>> listar() {
@@ -86,18 +86,15 @@ public class SerieResource {
 			return ResponseEntity.badRequest().build();
 
 		else {
-			serie.setNome(serie.getNome());
-			serie.getExercicios().forEach(i -> {
-				i.setSerie(serie);
-				i.setExercicio(exercicios.findById(i.getExercicio().getCodigo()).get());
-				i.setNumeroSerie(i.getNumeroSerie());
-				i.setNumeroRepeticao(i.getNumeroRepeticao());
-			});
+			serieService.save(serie);
 			
 			Serie seriebd = series.save(serie);
 
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
-					.buildAndExpand(seriebd.getCodigo()).toUri();
+			URI uri = ServletUriComponentsBuilder
+					.fromCurrentRequest()
+					.path("/{codigo}")
+					.buildAndExpand(seriebd.getCodigo())
+					.toUri();
 
 			return ResponseEntity.created(uri).build();
 		}

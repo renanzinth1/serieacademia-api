@@ -22,6 +22,7 @@ public class SerieExercicio {
 	@SequenceGenerator(name = "CODIGO_SERIE_EXERCICIO", sequenceName = "SEQ_CODIGO_SERIE_EXERCICIO", allocationSize = 1)
 	private Long codigo;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_serie_fk")
 	private Serie serie;
@@ -31,22 +32,22 @@ public class SerieExercicio {
 	@JoinColumn(name = "codigo_exercicio_fk")
 	private Exercicio exercicio;
 	
-	@Column(name = "numero_serie")
 	@NotNull
 	@Min(value = 1)
+	@Column(name = "numero_serie")
 	private Long numeroSerie;
 	
-	@Column(name = "numero_repeticao")
 	@NotNull
 	@Min(value = 1)
+	@Column(name = "numero_repeticao")
 	private Long numeroRepeticao;
 
 	public SerieExercicio() {
 		super();
 	}
 
-	public SerieExercicio(Long codigo, Serie serie, Exercicio exercicio, @NotBlank @Min(1) Long numeroSerie,
-			@NotBlank @Min(1) Long numeroRepeticao) {
+	public SerieExercicio(Long codigo, @NotNull Serie serie, @NotNull Exercicio exercicio,
+			@NotNull @Min(1) Long numeroSerie, @NotNull @Min(1) Long numeroRepeticao) {
 		super();
 		this.codigo = codigo;
 		this.serie = serie;

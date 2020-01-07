@@ -103,8 +103,11 @@ public class CategoriaResource {
 		else {
 			categoria = categorias.save(categoria);
 
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{codigo}")
-					.buildAndExpand(categoria.getCodigo()).toUri();
+			URI uri = ServletUriComponentsBuilder
+					.fromCurrentRequest()
+					.path("/{codigo}")
+					.buildAndExpand(categoria.getCodigo())
+					.toUri();
 
 			return ResponseEntity.created(uri).build();
 		}
@@ -124,6 +127,7 @@ public class CategoriaResource {
 
 			return ResponseEntity.accepted().body(categoria);
 		}
+		
 		return ResponseEntity.badRequest().build();
 	}
 
